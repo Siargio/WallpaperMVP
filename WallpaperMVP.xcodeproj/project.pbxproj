@@ -7,23 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC994F329ADE86400F283E1 /* MainPresenter.swift */; };
 		ECD07C6F29AD215600CAE16B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C6E29AD215600CAE16B /* AppDelegate.swift */; };
-		ECD07C7129AD215600CAE16B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C7029AD215600CAE16B /* SceneDelegate.swift */; };
-		ECD07C7329AD215600CAE16B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C7229AD215600CAE16B /* ViewController.swift */; };
-		ECD07C7629AD215600CAE16B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD07C7429AD215600CAE16B /* Main.storyboard */; };
+		ECD07C7329AD215600CAE16B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C7229AD215600CAE16B /* MainViewController.swift */; };
 		ECD07C7829AD215800CAE16B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD07C7729AD215800CAE16B /* Assets.xcassets */; };
 		ECD07C7B29AD215800CAE16B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD07C7929AD215800CAE16B /* LaunchScreen.storyboard */; };
+		ECD07C8729AD2E9400CAE16B /* AssemblyModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C8629AD2E9400CAE16B /* AssemblyModuleBuilder.swift */; };
+		ECD07C8929AD2FA600CAE16B /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C8829AD2FA600CAE16B /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECC994F329ADE86400F283E1 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		ECD07C6B29AD215600CAE16B /* WallpaperMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallpaperMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD07C6E29AD215600CAE16B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ECD07C7029AD215600CAE16B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECD07C7229AD215600CAE16B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ECD07C7529AD215600CAE16B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ECD07C7229AD215600CAE16B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		ECD07C7729AD215800CAE16B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECD07C7A29AD215800CAE16B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECD07C7C29AD215800CAE16B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECD07C8629AD2E9400CAE16B /* AssemblyModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModuleBuilder.swift; sourceTree = "<group>"; };
+		ECD07C8829AD2FA600CAE16B /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,48 @@
 		ECD07C6D29AD215600CAE16B /* WallpaperMVP */ = {
 			isa = PBXGroup;
 			children = (
-				ECD07C6E29AD215600CAE16B /* AppDelegate.swift */,
-				ECD07C7029AD215600CAE16B /* SceneDelegate.swift */,
-				ECD07C7229AD215600CAE16B /* ViewController.swift */,
-				ECD07C7429AD215600CAE16B /* Main.storyboard */,
-				ECD07C7729AD215800CAE16B /* Assets.xcassets */,
-				ECD07C7929AD215800CAE16B /* LaunchScreen.storyboard */,
-				ECD07C7C29AD215800CAE16B /* Info.plist */,
+				ECD07C8329AD26C900CAE16B /* App */,
+				ECD07C8529AD2E7800CAE16B /* ModuleBuilder */,
+				ECD07C8429AD294B00CAE16B /* Main */,
+				ECD07C8229AD260C00CAE16B /* Resources */,
 			);
 			path = WallpaperMVP;
+			sourceTree = "<group>";
+		};
+		ECD07C8229AD260C00CAE16B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ECD07C7929AD215800CAE16B /* LaunchScreen.storyboard */,
+				ECD07C7729AD215800CAE16B /* Assets.xcassets */,
+				ECD07C7C29AD215800CAE16B /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		ECD07C8329AD26C900CAE16B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				ECD07C6E29AD215600CAE16B /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ECD07C8429AD294B00CAE16B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				ECD07C7229AD215600CAE16B /* MainViewController.swift */,
+				ECC994F329ADE86400F283E1 /* MainPresenter.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		ECD07C8529AD2E7800CAE16B /* ModuleBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				ECD07C8629AD2E9400CAE16B /* AssemblyModuleBuilder.swift */,
+				ECD07C8829AD2FA600CAE16B /* Router.swift */,
+			);
+			path = ModuleBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +162,6 @@
 			files = (
 				ECD07C7B29AD215800CAE16B /* LaunchScreen.storyboard in Resources */,
 				ECD07C7829AD215800CAE16B /* Assets.xcassets in Resources */,
-				ECD07C7629AD215600CAE16B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +172,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECD07C7329AD215600CAE16B /* ViewController.swift in Sources */,
+				ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */,
+				ECD07C8929AD2FA600CAE16B /* Router.swift in Sources */,
+				ECD07C7329AD215600CAE16B /* MainViewController.swift in Sources */,
 				ECD07C6F29AD215600CAE16B /* AppDelegate.swift in Sources */,
-				ECD07C7129AD215600CAE16B /* SceneDelegate.swift in Sources */,
+				ECD07C8729AD2E9400CAE16B /* AssemblyModuleBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ECD07C7429AD215600CAE16B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECD07C7529AD215600CAE16B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ECD07C7929AD215800CAE16B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,12 +317,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3496F3A4HL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WallpaperMVP/Info.plist;
+				INFOPLIST_FILE = WallpaperMVP/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,6 +331,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.WallpaperMVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -317,12 +349,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3496F3A4HL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WallpaperMVP/Info.plist;
+				INFOPLIST_FILE = WallpaperMVP/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,6 +363,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.WallpaperMVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
