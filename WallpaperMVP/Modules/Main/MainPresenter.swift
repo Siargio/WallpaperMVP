@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MainPresenterProtocol: AnyObject {
-
+    func tapOnThePhoto(model: FlowLayoutCell)
 }
 
 final class MainPresenter {
@@ -25,5 +25,7 @@ final class MainPresenter {
 }
 
 extension MainPresenter: MainPresenterProtocol {
-    
+    func tapOnThePhoto(model: FlowLayoutCell) {
+        router?.showDetail(model: model)
+    }
 }
