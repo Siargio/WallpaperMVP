@@ -17,7 +17,7 @@ protocol RouterMain: AnyObject {
 // протокол для роутера
 protocol RouterProtocol: RouterMain {
     func initialViewController() // начальный
-    //func showDetail(model: Photo?) //
+    func showDetail(model: FlowLayoutCell) // детейл
     //func popTopRoot()
 }
 
@@ -41,5 +41,10 @@ final class Router: RouterProtocol { // класс который имплеме
         }
     }
 
-
+    func showDetail(model: FlowLayoutCell) {
+        if let navigationController = navigationController {
+            guard let detailViewController = assemblyBuilder?.createDetailModule(router: self, model: model) else { return }
+            navigationController.present(detailViewController, animated: true, completion: nil)
+        }
+    }
 }

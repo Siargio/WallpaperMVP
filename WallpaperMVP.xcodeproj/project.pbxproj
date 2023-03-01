@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ECC810EA29AF2C4D00CEE04B /* FlowLayoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810E929AF2C4D00CEE04B /* FlowLayoutCell.swift */; };
+		ECC810EC29AF497500CEE04B /* DetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */; };
+		ECC810EE29AF49D900CEE04B /* DetailInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */; };
 		ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC994F329ADE86400F283E1 /* MainPresenter.swift */; };
 		ECD07C6F29AD215600CAE16B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C6E29AD215600CAE16B /* AppDelegate.swift */; };
 		ECD07C7329AD215600CAE16B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07C7229AD215600CAE16B /* MainViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECC810E929AF2C4D00CEE04B /* FlowLayoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutCell.swift; sourceTree = "<group>"; };
+		ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewController.swift; sourceTree = "<group>"; };
+		ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoPresenter.swift; sourceTree = "<group>"; };
 		ECC994F329ADE86400F283E1 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		ECD07C6B29AD215600CAE16B /* WallpaperMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallpaperMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD07C6E29AD215600CAE16B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +45,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC45210729AE9EAD0091663E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				ECC810E829AF2C3200CEE04B /* Cell */,
+				ECD07C8429AD294B00CAE16B /* Main */,
+				EC45210829AE9EB50091663E /* DetailInfo */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		EC45210829AE9EB50091663E /* DetailInfo */ = {
+			isa = PBXGroup;
+			children = (
+				ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */,
+				ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */,
+			);
+			path = DetailInfo;
+			sourceTree = "<group>";
+		};
+		ECC810E829AF2C3200CEE04B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				ECC810E929AF2C4D00CEE04B /* FlowLayoutCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		ECD07C6229AD215600CAE16B = {
 			isa = PBXGroup;
 			children = (
@@ -60,7 +93,7 @@
 			children = (
 				ECD07C8329AD26C900CAE16B /* App */,
 				ECD07C8529AD2E7800CAE16B /* ModuleBuilder */,
-				ECD07C8429AD294B00CAE16B /* Main */,
+				EC45210729AE9EAD0091663E /* Modules */,
 				ECD07C8229AD260C00CAE16B /* Resources */,
 			);
 			path = WallpaperMVP;
@@ -175,8 +208,11 @@
 				ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */,
 				ECD07C8929AD2FA600CAE16B /* Router.swift in Sources */,
 				ECD07C7329AD215600CAE16B /* MainViewController.swift in Sources */,
+				ECC810EE29AF49D900CEE04B /* DetailInfoPresenter.swift in Sources */,
 				ECD07C6F29AD215600CAE16B /* AppDelegate.swift in Sources */,
+				ECC810EC29AF497500CEE04B /* DetailInfoViewController.swift in Sources */,
 				ECD07C8729AD2E9400CAE16B /* AssemblyModuleBuilder.swift in Sources */,
+				ECC810EA29AF2C4D00CEE04B /* FlowLayoutCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

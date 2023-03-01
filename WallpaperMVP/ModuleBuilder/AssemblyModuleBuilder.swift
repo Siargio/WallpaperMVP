@@ -9,7 +9,8 @@ import UIKit
 
 protocol AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController
-    //func createDetailModule(router: RouterProtocol, model: Photo?) -> UIViewController
+    func createDetailModule(router: RouterProtocol, model: FlowLayoutCell) -> UIViewController
+
 }
 
 final class AssemblyModuleBuilder:
@@ -23,5 +24,11 @@ final class AssemblyModuleBuilder:
     }
 
     // инициализация второго контроллера ViewController
+    func createDetailModule(router: RouterProtocol, model: FlowLayoutCell) -> UIViewController {
+        let view = DetailInfoViewController()
+        let presenter = DetailInfoPresenter(view: view, router: router, model: model)
+        view.presenter = presenter
+        return view
+    }
 }
 
