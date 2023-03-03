@@ -12,11 +12,11 @@ enum MainEndpoint: EndpointProtocol {
     case getPhotosByName(keyword: String, page: Int)
 
     var scheme: String {
-        return "https"
+        return Strings.scheme
     }
 
     var host: String {
-        return "api.pexels.com"
+        return Strings.host
     }
 
     var method: RequestMethod {
@@ -24,15 +24,15 @@ enum MainEndpoint: EndpointProtocol {
     }
 
     var headers: [String: String]? {
-        return ["Authorization" : "1tdfoPtrGNI02OzqgaxkGyibkJ1KAk9agmGU1rCqZAPjAEwFWH4RdECh"]
+        return [Strings.authorization : Strings.headers]
     }
 
     var path: String {
         switch self {
         case .getCuratedPhotos:
-            return "/v1/curated"
+            return Strings.pathCurated
         case .getPhotosByName:
-            return "/v1/search"
+            return Strings.pathSearch
         }
     }
 
@@ -40,14 +40,31 @@ enum MainEndpoint: EndpointProtocol {
         switch self {
         case .getCuratedPhotos(let page):
             return [
-                URLQueryItem(name: "page", value: "\(page)"),
-                URLQueryItem(name: "per_page", value: "16")
+                URLQueryItem(name: Strings.page, value: "\(page)"),
+                URLQueryItem(name: Strings.per_page, value: Strings.value)
             ]
         case .getPhotosByName(let query , let page):
             return [
-                URLQueryItem(name: "query", value: "\(query)"),
-                URLQueryItem(name: "page", value: "\(page)"),
+                URLQueryItem(name: Strings.query, value: "\(query)"),
+                URLQueryItem(name: Strings.page, value: "\(page)"),
             ]
         }
+    }
+}
+
+// MARK: - Strings
+
+extension MainEndpoint {
+    enum Strings {
+        static let scheme = "https"
+        static let host = "api.pexels.com"
+        static let authorization = "Authorization"
+        static let headers = "1tdfoPtrGNI02OzqgaxkGyibkJ1KAk9agmGU1rCqZAPjAEwFWH4RdECh"
+        static let pathCurated = "/v1/curated"
+        static let pathSearch = "/v1/search"
+        static let page = "page"
+        static let per_page = "per_page"
+        static let value = "16"
+        static let query = "query"
     }
 }

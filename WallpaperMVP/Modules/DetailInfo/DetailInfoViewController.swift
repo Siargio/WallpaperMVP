@@ -10,9 +10,12 @@ import Kingfisher
 
 protocol DetailInfoViewProtocol: AnyObject {
     func displayDetailInfo(viewModel: DetailInfoViewModel)
+    func displayActivityController(items: [String])
+    func displayError()
+    func displaySuccessMessage()
 }
 
-class DetailInfoViewController: UIViewController {
+final class DetailInfoViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -30,9 +33,9 @@ class DetailInfoViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = .black
-        label.font = .systemFont(ofSize: 18, weight: .light)
+        label.font = .systemFont(ofSize: Metrics.fontOfSizeDescriptionLabel, weight: .light)
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.7
+        label.minimumScaleFactor = Metrics.minimumScaleFactor
         return label
     }()
 
@@ -40,25 +43,27 @@ class DetailInfoViewController: UIViewController {
         let label = UILabel()
         label.textColor = .black
         label.text = "hjguoygoyg"
-        label.font = .systemFont(ofSize: 19, weight: .medium)
+        label.font = .systemFont(ofSize: Metrics.fontOfSizePhotographerLabel, weight: .medium)
         return label
     }()
 
-    private let saveButton: UIButton = {
+    private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
-        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(savePressed), for: .touchUpInside)
+        button.layer.cornerRadius = Metrics.cornerRadius
         return button
     }()
 
-    private let shareButton: UIButton = {
+    private lazy var shareButton: UIButton = {
         let button = UIButton()
         button.setTitle("Share", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = Metrics.cornerRadius
+        button.addTarget(self, action: #selector(sharePressed), for: .touchUpInside)
         return button
     }()
 
@@ -67,7 +72,7 @@ class DetailInfoViewController: UIViewController {
         stackView.distribution = .equalSpacing
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 10
+        stackView.spacing = Metrics.spacingInfoStackView
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -75,7 +80,7 @@ class DetailInfoViewController: UIViewController {
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [saveButton, shareButton])
         stackView.distribution = .fillProportionally
-        stackView.spacing = 150
+        stackView.spacing = Metrics.spacingButtonStackView
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -119,15 +124,15 @@ class DetailInfoViewController: UIViewController {
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: futterStackView.topAnchor, constant: -5),
+            imageView.bottomAnchor.constraint(equalTo: futterStackView.topAnchor, constant: -Metrics.imageViewBottomAnchor),
 
-            shareButton.widthAnchor.constraint(equalToConstant: 70),
-            saveButton.widthAnchor.constraint(equalToConstant: 70),
+            shareButton.widthAnchor.constraint(equalToConstant: Metrics.buttonWidthAnchor),
+            saveButton.widthAnchor.constraint(equalToConstant: Metrics.buttonWidthAnchor),
 
-            futterStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            futterStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            futterStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            futterStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
+            futterStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.futterStackViewLeadingTrailing),
+            futterStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.futterStackViewLeadingTrailing),
+            futterStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.imageViewBottomAnchor),
+            futterStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Metrics.heightAnchorMultiply)
         ])
     }
 
@@ -146,20 +151,63 @@ class DetailInfoViewController: UIViewController {
             case .success:
                 self.futterStackView.isHidden = false
             case .failure:
-                print("fafim")
-                //self.displayError()
+                self.displayError()
             }
         }
+    }
+
+    //MARK: - Actions
+
+    @objc func sharePressed() {
+        presenter?.shareDetailInfo()
+    }
+
+    @objc func savePressed() {
+        presenter?.savePhoto()
     }
 }
 
 // MARK: - DetailViewProtocol
 
 extension DetailInfoViewController: DetailInfoViewProtocol {
+
     func displayDetailInfo(viewModel: DetailInfoViewModel) {
         descriptionLabel.text = viewModel.imageName
         photographerLabel.text = viewModel.photographer
         setPhoto(with: viewModel.url)
     }
 
+    func displayActivityController(items: [String]) {
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
+    }
+
+    func displayError(){
+        AlertService.shared.showAlert(viewController: self, type: .error) { [weak self] in
+            guard let self = self else { return }
+            self.presenter?.presentDetailInfo()
+        }
+    }
+
+    func displaySuccessMessage() {
+        AlertService.shared.showAlert(viewController: self, type: .success)
+    }
+}
+
+// MARK: - Metrics
+
+extension DetailInfoViewController {
+
+    enum Metrics {
+        static let cornerRadius: CGFloat = 10
+        static let spacingInfoStackView: CGFloat = 10
+        static let spacingButtonStackView: CGFloat = 150
+        static let fontOfSizeDescriptionLabel: CGFloat = 18
+        static let fontOfSizePhotographerLabel: CGFloat = 19
+        static let minimumScaleFactor: CGFloat = 0.7
+        static let buttonWidthAnchor: CGFloat = 70
+        static let imageViewBottomAnchor: CGFloat = 5
+        static let futterStackViewLeadingTrailing: CGFloat = 20
+        static let heightAnchorMultiply: CGFloat = 0.2
+    }
 }
