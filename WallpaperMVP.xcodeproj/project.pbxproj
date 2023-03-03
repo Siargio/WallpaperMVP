@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ECC810EA29AF2C4D00CEE04B /* FlowLayoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810E929AF2C4D00CEE04B /* FlowLayoutCell.swift */; };
+		EC1C032829B1DDA500DFDE19 /* FlowLayoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C032729B1DDA500DFDE19 /* FlowLayoutCell.swift */; };
+		EC1C032B29B1DEFF00DFDE19 /* CuratedPhotoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C032A29B1DEFF00DFDE19 /* CuratedPhotoDTO.swift */; };
+		EC1C032D29B1DF1200DFDE19 /* CuraredPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C032C29B1DF1200DFDE19 /* CuraredPhotosViewModel.swift */; };
+		EC1C033329B1E03100DFDE19 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C033229B1E03100DFDE19 /* NetworkService.swift */; };
+		EC1C033529B1E05400DFDE19 /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C033429B1E05400DFDE19 /* EndpointProtocol.swift */; };
+		EC1C033729B1E06F00DFDE19 /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C033629B1E06F00DFDE19 /* RequestMethod.swift */; };
+		EC1C033A29B1E1E600DFDE19 /* MainEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C033929B1E1E600DFDE19 /* MainEndpoint.swift */; };
+		EC1C033D29B1E4EE00DFDE19 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EC1C033C29B1E4EE00DFDE19 /* Kingfisher */; };
 		ECC810EC29AF497500CEE04B /* DetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */; };
 		ECC810EE29AF49D900CEE04B /* DetailInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */; };
 		ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC994F329ADE86400F283E1 /* MainPresenter.swift */; };
@@ -20,7 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ECC810E929AF2C4D00CEE04B /* FlowLayoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutCell.swift; sourceTree = "<group>"; };
+		EC1C032729B1DDA500DFDE19 /* FlowLayoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlowLayoutCell.swift; path = ../FlowLayoutCell.swift; sourceTree = "<group>"; };
+		EC1C032A29B1DEFF00DFDE19 /* CuratedPhotoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuratedPhotoDTO.swift; sourceTree = "<group>"; };
+		EC1C032C29B1DF1200DFDE19 /* CuraredPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuraredPhotosViewModel.swift; sourceTree = "<group>"; };
+		EC1C033229B1E03100DFDE19 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		EC1C033429B1E05400DFDE19 /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
+		EC1C033629B1E06F00DFDE19 /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
+		EC1C033929B1E1E600DFDE19 /* MainEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEndpoint.swift; sourceTree = "<group>"; };
 		ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewController.swift; sourceTree = "<group>"; };
 		ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoPresenter.swift; sourceTree = "<group>"; };
 		ECC994F329ADE86400F283E1 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
@@ -39,15 +52,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1C033D29B1E4EE00DFDE19 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC1C032929B1DEE900DFDE19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC1C032A29B1DEFF00DFDE19 /* CuratedPhotoDTO.swift */,
+				EC1C032C29B1DF1200DFDE19 /* CuraredPhotosViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC1C032E29B1DF5B00DFDE19 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EC1C033029B1E00900DFDE19 /* NetworkService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EC1C033029B1E00900DFDE19 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				EC1C033229B1E03100DFDE19 /* NetworkService.swift */,
+				EC1C033429B1E05400DFDE19 /* EndpointProtocol.swift */,
+				EC1C033629B1E06F00DFDE19 /* RequestMethod.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		EC45210729AE9EAD0091663E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EC1C032929B1DEE900DFDE19 /* Model */,
 				ECC810E829AF2C3200CEE04B /* Cell */,
 				ECD07C8429AD294B00CAE16B /* Main */,
 				EC45210829AE9EB50091663E /* DetailInfo */,
@@ -67,7 +109,7 @@
 		ECC810E829AF2C3200CEE04B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				ECC810E929AF2C4D00CEE04B /* FlowLayoutCell.swift */,
+				EC1C032729B1DDA500DFDE19 /* FlowLayoutCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -93,6 +135,7 @@
 			children = (
 				ECD07C8329AD26C900CAE16B /* App */,
 				ECD07C8529AD2E7800CAE16B /* ModuleBuilder */,
+				EC1C032E29B1DF5B00DFDE19 /* Services */,
 				EC45210729AE9EAD0091663E /* Modules */,
 				ECD07C8229AD260C00CAE16B /* Resources */,
 			);
@@ -122,6 +165,7 @@
 			children = (
 				ECD07C7229AD215600CAE16B /* MainViewController.swift */,
 				ECC994F329ADE86400F283E1 /* MainPresenter.swift */,
+				EC1C033929B1E1E600DFDE19 /* MainEndpoint.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -151,6 +195,9 @@
 			dependencies = (
 			);
 			name = WallpaperMVP;
+			packageProductDependencies = (
+				EC1C033C29B1E4EE00DFDE19 /* Kingfisher */,
+			);
 			productName = WallpaperMVP;
 			productReference = ECD07C6B29AD215600CAE16B /* WallpaperMVP.app */;
 			productType = "com.apple.product-type.application";
@@ -179,6 +226,9 @@
 				Base,
 			);
 			mainGroup = ECD07C6229AD215600CAE16B;
+			packageReferences = (
+				EC1C033B29B1E4EE00DFDE19 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = ECD07C6C29AD215600CAE16B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -205,14 +255,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1C033729B1E06F00DFDE19 /* RequestMethod.swift in Sources */,
+				EC1C033529B1E05400DFDE19 /* EndpointProtocol.swift in Sources */,
+				EC1C033329B1E03100DFDE19 /* NetworkService.swift in Sources */,
+				EC1C032B29B1DEFF00DFDE19 /* CuratedPhotoDTO.swift in Sources */,
 				ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */,
+				EC1C033A29B1E1E600DFDE19 /* MainEndpoint.swift in Sources */,
+				EC1C032D29B1DF1200DFDE19 /* CuraredPhotosViewModel.swift in Sources */,
 				ECD07C8929AD2FA600CAE16B /* Router.swift in Sources */,
 				ECD07C7329AD215600CAE16B /* MainViewController.swift in Sources */,
 				ECC810EE29AF49D900CEE04B /* DetailInfoPresenter.swift in Sources */,
 				ECD07C6F29AD215600CAE16B /* AppDelegate.swift in Sources */,
+				EC1C032829B1DDA500DFDE19 /* FlowLayoutCell.swift in Sources */,
 				ECC810EC29AF497500CEE04B /* DetailInfoViewController.swift in Sources */,
 				ECD07C8729AD2E9400CAE16B /* AssemblyModuleBuilder.swift in Sources */,
-				ECC810EA29AF2C4D00CEE04B /* FlowLayoutCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +486,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC1C033B29B1E4EE00DFDE19 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher?ysclid=leqy9ts8jv620236141";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC1C033C29B1E4EE00DFDE19 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC1C033B29B1E4EE00DFDE19 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECD07C6329AD215600CAE16B /* Project object */;
 }

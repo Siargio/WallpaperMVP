@@ -1,11 +1,12 @@
 //
-//  CompositionalCell.swift
+//  FlowLayoutCell.swift
 //  WallpaperMVP
 //
-//  Created by Sergio on 1.03.23.
+//  Created by Sergio on 3.03.23.
 //
 
 import UIKit
+import Kingfisher
 
 class FlowLayoutCell: UICollectionViewCell {
 
@@ -39,6 +40,19 @@ class FlowLayoutCell: UICollectionViewCell {
     }
 
     // MARK: - Setups
+
+    func configureCell(url: URL) {
+        let processor = DownsamplingImageProcessor(size: imageView.bounds.size)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "placeholderImage"),
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .cacheOriginalImage
+            ])
+    }
     
     private func setupHierarchy() {
         addSubview(imageView)

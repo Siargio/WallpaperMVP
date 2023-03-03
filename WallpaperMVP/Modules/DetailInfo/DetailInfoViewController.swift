@@ -12,10 +12,13 @@ protocol DetailInfoViewProtocol: AnyObject {
 }
 
 class DetailInfoViewController: UIViewController {
+
     // MARK: - Properties
+
     var presenter: DetailInfoPresenterProtocol?
 
     // MARK: - UIElements
+    
     let imageView: UIImageView = {
         let image = UIImage(named: "image")
         let imageView = UIImageView(image: image)

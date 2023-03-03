@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: - Protocols
+
 //первым создаем роутер
 protocol RouterMain: AnyObject {
     var navigationController: UINavigationController? { get set }  // для каждого роутера у нас свой навигейшен контроллер
@@ -17,18 +18,21 @@ protocol RouterMain: AnyObject {
 // протокол для роутера
 protocol RouterProtocol: RouterMain {
     func initialViewController() // начальный
-    func showDetail(model: FlowLayoutCell) // детейл
+    func showDetail(model: Photo?) // детейл
     //func popTopRoot()
 }
 
 // MARK: - Class
+
 final class Router: RouterProtocol { // класс который имплементит или конформит(соответствует), он нужен чтобы мы могли протестировать. Он занимается Только навигацией
 
     // MARK: - Properties
+    
     var navigationController: UINavigationController? // Вьюконтроллер с которого будет стартовать
     var assemblyBuilder: AssemblyBuilderProtocol?
 
     // MARK: - Initialization
+
     init(navigationController: UINavigationController, assemblyBuilder: AssemblyBuilderProtocol){
         self.navigationController = navigationController
         self.assemblyBuilder = assemblyBuilder
@@ -41,7 +45,7 @@ final class Router: RouterProtocol { // класс который имплеме
         }
     }
 
-    func showDetail(model: FlowLayoutCell) {
+    func showDetail(model: Photo?) {
         if let navigationController = navigationController {
             guard let detailViewController = assemblyBuilder?.createDetailModule(router: self, model: model) else { return }
             navigationController.present(detailViewController, animated: true, completion: nil)
