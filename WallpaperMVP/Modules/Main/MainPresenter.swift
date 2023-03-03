@@ -24,7 +24,7 @@ final class MainPresenter {
 
     var isLoading: Bool = false
 
-    // MARK: - Initialization
+    // MARK: - LifeCycle
     
     init(view: MainViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view

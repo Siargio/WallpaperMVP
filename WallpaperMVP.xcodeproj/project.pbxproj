@@ -15,6 +15,8 @@
 		EC1C033729B1E06F00DFDE19 /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C033629B1E06F00DFDE19 /* RequestMethod.swift */; };
 		EC1C033A29B1E1E600DFDE19 /* MainEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C033929B1E1E600DFDE19 /* MainEndpoint.swift */; };
 		EC1C033D29B1E4EE00DFDE19 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EC1C033C29B1E4EE00DFDE19 /* Kingfisher */; };
+		EC1C033F29B1EC0C00DFDE19 /* DetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C033E29B1EC0C00DFDE19 /* DetailInfoViewModel.swift */; };
+		EC1C034129B2173800DFDE19 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C034029B2173800DFDE19 /* AlertService.swift */; };
 		ECC810EC29AF497500CEE04B /* DetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */; };
 		ECC810EE29AF49D900CEE04B /* DetailInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */; };
 		ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC994F329ADE86400F283E1 /* MainPresenter.swift */; };
@@ -34,6 +36,8 @@
 		EC1C033429B1E05400DFDE19 /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
 		EC1C033629B1E06F00DFDE19 /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
 		EC1C033929B1E1E600DFDE19 /* MainEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEndpoint.swift; sourceTree = "<group>"; };
+		EC1C033E29B1EC0C00DFDE19 /* DetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewModel.swift; sourceTree = "<group>"; };
+		EC1C034029B2173800DFDE19 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoViewController.swift; sourceTree = "<group>"; };
 		ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoPresenter.swift; sourceTree = "<group>"; };
 		ECC994F329ADE86400F283E1 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				EC1C033029B1E00900DFDE19 /* NetworkService */,
+				EC1C034229B2173C00DFDE19 /* AlertService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -84,6 +89,14 @@
 				EC1C033629B1E06F00DFDE19 /* RequestMethod.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		EC1C034229B2173C00DFDE19 /* AlertService */ = {
+			isa = PBXGroup;
+			children = (
+				EC1C034029B2173800DFDE19 /* AlertService.swift */,
+			);
+			path = AlertService;
 			sourceTree = "<group>";
 		};
 		EC45210729AE9EAD0091663E /* Modules */ = {
@@ -102,6 +115,7 @@
 			children = (
 				ECC810EB29AF497500CEE04B /* DetailInfoViewController.swift */,
 				ECC810ED29AF49D900CEE04B /* DetailInfoPresenter.swift */,
+				EC1C033E29B1EC0C00DFDE19 /* DetailInfoViewModel.swift */,
 			);
 			path = DetailInfo;
 			sourceTree = "<group>";
@@ -261,6 +275,7 @@
 				EC1C032B29B1DEFF00DFDE19 /* CuratedPhotoDTO.swift in Sources */,
 				ECC994F429ADE86400F283E1 /* MainPresenter.swift in Sources */,
 				EC1C033A29B1E1E600DFDE19 /* MainEndpoint.swift in Sources */,
+				EC1C034129B2173800DFDE19 /* AlertService.swift in Sources */,
 				EC1C032D29B1DF1200DFDE19 /* CuraredPhotosViewModel.swift in Sources */,
 				ECD07C8929AD2FA600CAE16B /* Router.swift in Sources */,
 				ECD07C7329AD215600CAE16B /* MainViewController.swift in Sources */,
@@ -269,6 +284,7 @@
 				EC1C032829B1DDA500DFDE19 /* FlowLayoutCell.swift in Sources */,
 				ECC810EC29AF497500CEE04B /* DetailInfoViewController.swift in Sources */,
 				ECD07C8729AD2E9400CAE16B /* AssemblyModuleBuilder.swift in Sources */,
+				EC1C033F29B1EC0C00DFDE19 /* DetailInfoViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

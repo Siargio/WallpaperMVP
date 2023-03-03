@@ -30,7 +30,7 @@ final class MainViewController: UIViewController {
 
     // MARK: - UIElements
 
-    lazy var searchBar: UISearchController = {
+    private lazy var searchBar: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.showsSearchResultsController = true
         searchController.automaticallyShowsScopeBar = false
@@ -90,52 +90,70 @@ final class MainViewController: UIViewController {
     }
 }
 
-// MARK: - Extension UICollectionView
+// MARK: - UICollectionViewDataSource
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    //количество ячеек
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let count = photos?.count else { return 20 }
         return count
     }
 
+    //отображение самой ячейки
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: FlowLayoutCell.identifier, for: indexPath) as? FlowLayoutCell else {
             return UICollectionViewCell()
         }
-
         if let photos = photos {
-            print("afaaf")
             cell.configureCell(url: photos[indexPath.row].mediumSrcUrl)
         }
         return cell
     }
 
-
+    // ячейки настройка
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.width / 2 - 15, height: view.frame.width / 2 - 15)
     }
 
+    //отступы
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    }
+
+    // загрузка контента при скроле
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if  offsetY > contentHeight - scrollView.frame.height {
+            if isSearching {
+                presenter?.fetchSearchData(page: nextPage, text: searchBar.searchBar.text)
+            } else {
+                presenter?.fetchData(page: nextPage)
+            }
+        }
     }
 }
 
 // MARK: - UICollectionViewDelegate
 
 extension MainViewController: UICollectionViewDelegate {
-
+    //нажатие на ячейку переход в детейл
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let photos = photos else { return }
         presenter?.tapOnThePhoto(model: photos[indexPath.row])
-
     }
 }
+
 // MARK: - UISearchResultsUpdating & UISearchControllerDelegate
 
 extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegate {
+
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, text.isEmpty {
-            print("fafa")
+            isSearching = false
+            photos = []
+            nextPage = 1
+            presenter?.fetchData(page: nextPage)
         }
     }
 }
@@ -143,12 +161,19 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
 // MARK: - UITextFieldDelegate
 
 extension MainViewController: UITextFieldDelegate {
-    
+    // поиск изображения
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        photos = []
+        presenter?.fetchSearchData(page: nextPage, text: searchBar.searchBar.text)
+        isSearching = true
+        return true
+    }
 }
 
 // MARK: - MainViewProtocol
 
 extension MainViewController: MainViewProtocol {
+    
     func displayPhotos(model: [Photo]) {
         if (photos?.append(contentsOf: model)) == nil {
             photos = model
@@ -160,9 +185,9 @@ extension MainViewController: MainViewProtocol {
     }
 
     func displayError() {
-//        AlertService.shared.showAlert(viewController: self, type: .error) { [weak self] in
-//            guard let self = self else { return }
-//            self.presenter?.fetchData(page: self.nextPage)
-//        }
+        AlertService.shared.showAlert(viewController: self, type: .error) { [weak self] in
+            guard let self = self else { return }
+            self.presenter?.fetchData(page: self.nextPage)
+        }
     }
 }

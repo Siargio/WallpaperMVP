@@ -10,12 +10,10 @@ import UIKit
 protocol AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController
     func createDetailModule(router: RouterProtocol, model: Photo?) -> UIViewController
-
 }
 
-final class AssemblyModuleBuilder:
+final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
     // инициализация первого контроллера ViewController
-    AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
         let networkService = NetworkService()
@@ -32,4 +30,3 @@ final class AssemblyModuleBuilder:
         return view
     }
 }
-
