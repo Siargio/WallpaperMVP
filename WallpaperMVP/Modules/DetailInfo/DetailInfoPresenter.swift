@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DetailInfoPresenterProtocol: AnyObject {
-    
+    func presentDetailInfo()
 }
 
 final class DetailInfoPresenter: NSObject {
@@ -20,7 +20,7 @@ final class DetailInfoPresenter: NSObject {
     private let router: RouterProtocol?
     private let model: Photo?
 
-    // MARK: - Initialization
+    // MARK: - LifeCycle
 
     init(view: DetailInfoViewProtocol, router: RouterProtocol, model: Photo?) {
         self.view = view
@@ -29,6 +29,23 @@ final class DetailInfoPresenter: NSObject {
     }
 }
 
+// MARK: - DetailInfoPresenterProtocol
+
 extension DetailInfoPresenter: DetailInfoPresenterProtocol {
 
+    func presentDetailInfo() {
+        guard
+            let url = model?.originalSrcUrl,
+            let photographer = model?.photographer,
+                let imageName = model?.photoTitle
+        else {
+            return
+        }
+        let model = DetailInfoViewModel(
+            url: url,
+            photographer: photographer,
+            imageName: imageName)
+
+        view?.displayDetailInfo(viewModel: model)
+    }
 }

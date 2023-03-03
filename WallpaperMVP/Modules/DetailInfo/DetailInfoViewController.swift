@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol DetailInfoViewProtocol: AnyObject {
-
+    func displayDetailInfo(viewModel: DetailInfoViewModel)
 }
 
 class DetailInfoViewController: UIViewController {
@@ -19,56 +20,54 @@ class DetailInfoViewController: UIViewController {
 
     // MARK: - UIElements
     
-    let imageView: UIImageView = {
-        let image = UIImage(named: "image")
-        let imageView = UIImageView(image: image)
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 3
+        label.numberOfLines = 0
         label.textColor = .black
-        label.text = "aflkalfkm aflkklf af akf af alkk flkamf mafwl mlakm la falfm almkmlm mmmafafaf af ff aafaf"
         label.font = .systemFont(ofSize: 18, weight: .light)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.7
         return label
     }()
 
-    let photographerLabel: UILabel = {
+    private let photographerLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "afafnawf jaf ajf faff"
+        label.text = "hjguoygoyg"
         label.font = .systemFont(ofSize: 19, weight: .medium)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    let saveButton: UIButton = {
+    private let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
-    let shareButton: UIButton = {
+    private let shareButton: UIButton = {
         let button = UIButton()
         button.setTitle("Share", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private lazy var infoStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [descriptionLabel, photographerLabel])
+        stackView.distribution = .equalSpacing
         stackView.axis = .vertical
         stackView.alignment = .center
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -85,21 +84,27 @@ class DetailInfoViewController: UIViewController {
 
     private lazy var futterStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [infoStackView, buttonStackView])
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .equalSpacing
         stackView.axis = .vertical
         stackView.alignment = .center
-        stackView.spacing = 5        //stackView.isHidden = true
+        stackView.isHidden = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
-    // MARK: - Life cycle
+    // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
 
         setupHierarchy()
         setupLayout()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.presentDetailInfo()
     }
 
     // MARK: - Setups
@@ -114,7 +119,7 @@ class DetailInfoViewController: UIViewController {
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: futterStackView.topAnchor, constant: -10),
+            imageView.bottomAnchor.constraint(equalTo: futterStackView.topAnchor, constant: -5),
 
             shareButton.widthAnchor.constraint(equalToConstant: 70),
             saveButton.widthAnchor.constraint(equalToConstant: 70),
@@ -122,11 +127,39 @@ class DetailInfoViewController: UIViewController {
             futterStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             futterStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             futterStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            futterStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.17)
+            futterStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
         ])
+    }
+
+    private func setPhoto(with url: URL) {
+        let processor = DownsamplingImageProcessor(size: imageView.bounds.size)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: url,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .cacheOriginalImage
+            ]) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.futterStackView.isHidden = false
+            case .failure:
+                print("fafim")
+                //self.displayError()
+            }
+        }
     }
 }
 
 // MARK: - DetailViewProtocol
+
 extension DetailInfoViewController: DetailInfoViewProtocol {
+    func displayDetailInfo(viewModel: DetailInfoViewModel) {
+        descriptionLabel.text = viewModel.imageName
+        photographerLabel.text = viewModel.photographer
+        setPhoto(with: viewModel.url)
+    }
+
 }

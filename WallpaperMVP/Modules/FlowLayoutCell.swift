@@ -17,8 +17,7 @@ class FlowLayoutCell: UICollectionViewCell {
     // MARK: - UIElement
 
     let imageView: UIImageView = {
-        let image = UIImage(named: "image")
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
