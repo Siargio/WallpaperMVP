@@ -8,15 +8,28 @@
 import UIKit
 
 protocol MainViewProtocol: AnyObject {
-    
+    func displayPhotos(model: [Photo])
+    func updateNextPage(page: Int)
+    func displayError()
 }
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     // MARK: - Properties
+
     var presenter: MainPresenterProtocol?
 
+    private var nextPage: Int = 1
+    private var isSearching: Bool = false
+
+    private var photos: [Photo]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+
     // MARK: - UIElements
+
     lazy var searchBar: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.showsSearchResultsController = true
@@ -40,6 +53,7 @@ class MainViewController: UIViewController {
     }()
 
     // MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -47,6 +61,7 @@ class MainViewController: UIViewController {
         setupHierarchy()
         setupLayout()
         setupNavigationController()
+        startSettings()
     }
 
     // MARK: - Setups
@@ -69,12 +84,18 @@ class MainViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
     }
+
+    private func startSettings() {
+        presenter?.fetchData(page: nextPage)
+    }
 }
 
 // MARK: - Extension UICollectionView
-extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        guard let count = photos?.count else { return 20 }
+        return count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -82,13 +103,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
 
+        if let photos = photos {
+            print("afaaf")
+            cell.configureCell(url: photos[indexPath.row].mediumSrcUrl)
+        }
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.tapOnThePhoto(model: FlowLayoutCell())
-
-    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.width / 2 - 15, height: view.frame.width / 2 - 15)
@@ -99,7 +120,18 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+// MARK: - UICollectionViewDelegate
+
+extension MainViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photos = photos else { return }
+        presenter?.tapOnThePhoto(model: photos[indexPath.row])
+
+    }
+}
 // MARK: - UISearchResultsUpdating & UISearchControllerDelegate
+
 extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, text.isEmpty {
@@ -109,10 +141,28 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
 }
 
 // MARK: - UITextFieldDelegate
+
 extension MainViewController: UITextFieldDelegate {
+    
 }
 
 // MARK: - MainViewProtocol
-extension MainViewController: MainViewProtocol {
 
+extension MainViewController: MainViewProtocol {
+    func displayPhotos(model: [Photo]) {
+        if (photos?.append(contentsOf: model)) == nil {
+            photos = model
+        }
+    }
+
+    func updateNextPage(page: Int) {
+        nextPage = page
+    }
+
+    func displayError() {
+//        AlertService.shared.showAlert(viewController: self, type: .error) { [weak self] in
+//            guard let self = self else { return }
+//            self.presenter?.fetchData(page: self.nextPage)
+//        }
+    }
 }

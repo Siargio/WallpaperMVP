@@ -8,17 +8,21 @@
 import UIKit
 
 protocol DetailInfoPresenterProtocol: AnyObject {
+    
 }
 
 final class DetailInfoPresenter: NSObject {
+
     // MARK: - Properties
+
     weak var view: DetailInfoViewProtocol?
 
     private let router: RouterProtocol?
-    private let model: FlowLayoutCell
+    private let model: Photo?
 
     // MARK: - Initialization
-    init(view: DetailInfoViewProtocol, router: RouterProtocol, model: FlowLayoutCell) {
+
+    init(view: DetailInfoViewProtocol, router: RouterProtocol, model: Photo?) {
         self.view = view
         self.router = router
         self.model = model
