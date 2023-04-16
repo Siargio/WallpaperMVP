@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol DetailInfoPresenterProtocol: AnyObject {
     func presentDetailInfo()
+    func shareDetailInfo()
+    func savePhoto()
 }
 
 final class DetailInfoPresenter: NSObject {
@@ -26,6 +29,16 @@ final class DetailInfoPresenter: NSObject {
         self.view = view
         self.router = router
         self.model = model
+    }
+
+    // MARK: - Private Methods
+    
+    @objc private func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if error != nil {
+            view?.displayError()
+        } else {
+            view?.displaySuccessMessage()
+        }
     }
 }
 
@@ -47,5 +60,34 @@ extension DetailInfoPresenter: DetailInfoPresenterProtocol {
             imageName: imageName)
 
         view?.displayDetailInfo(viewModel: model)
+    }
+
+    func savePhoto() {
+        guard let model = model else { return }
+        KingfisherManager.shared.retrieveImage(with: model.mediumSrcUrl, options: nil, progressBlock: nil) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let value):
+                    let image: UIImage? = value.image
+                    guard let image = image else { return }
+                    UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.saveCompleted), nil)
+                case .failure:
+                    self.view?.displayError()
+                }
+            }
+        }
+    }
+
+    func shareDetailInfo() {
+        guard
+            let url = model?.originalSrcUrl.absoluteString,
+            let photographer = model?.photographer,
+            let imageName = model?.photoTitle
+        else {
+            return
+        }
+
+        view?.displayActivityController(items: [url, photographer, imageName])
     }
 }

@@ -19,7 +19,7 @@ final class MainViewController: UIViewController {
 
     var presenter: MainPresenterProtocol?
 
-    private var nextPage: Int = 1
+    private var nextPage: Int = Metrics.nextPage
     private var isSearching: Bool = false
 
     private var photos: [Photo]? {
@@ -117,7 +117,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     //отступы
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        UIEdgeInsets(top: 0, left: Metrics.leftRight, bottom: 0, right: Metrics.leftRight)
     }
 
     // загрузка контента при скроле
@@ -152,7 +152,7 @@ extension MainViewController: UISearchResultsUpdating, UISearchControllerDelegat
         if let text = searchController.searchBar.text, text.isEmpty {
             isSearching = false
             photos = []
-            nextPage = 1
+            nextPage = Metrics.nextPage
             presenter?.fetchData(page: nextPage)
         }
     }
@@ -189,5 +189,16 @@ extension MainViewController: MainViewProtocol {
             guard let self = self else { return }
             self.presenter?.fetchData(page: self.nextPage)
         }
+    }
+}
+
+// MARK: - Metrics
+
+extension MainViewController {
+
+    enum Metrics {
+        static let nextPage = 1
+        static let leftRight: CGFloat = 10
+        static let widthРeight: CGFloat = 15
     }
 }
