@@ -87,6 +87,7 @@
 				EC1C033229B1E03100DFDE19 /* NetworkService.swift */,
 				EC1C033429B1E05400DFDE19 /* EndpointProtocol.swift */,
 				EC1C033629B1E06F00DFDE19 /* RequestMethod.swift */,
+				EC1C033929B1E1E600DFDE19 /* MainEndpoint.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -179,7 +180,6 @@
 			children = (
 				ECD07C7229AD215600CAE16B /* MainViewController.swift */,
 				ECC994F329ADE86400F283E1 /* MainPresenter.swift */,
-				EC1C033929B1E1E600DFDE19 /* MainEndpoint.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";

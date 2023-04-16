@@ -53,7 +53,6 @@ enum MainEndpoint: EndpointProtocol {
 }
 
 // MARK: - Strings
-
 extension MainEndpoint {
     enum Strings {
         static let scheme = "https"

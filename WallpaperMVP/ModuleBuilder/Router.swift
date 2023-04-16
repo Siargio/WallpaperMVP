@@ -28,7 +28,7 @@ final class Router: RouterProtocol { // класс который имплеме
 
     // MARK: - Properties
     
-    var navigationController: UINavigationController? // Вьюконтроллер с которого будет стартовать
+    var navigationController: UINavigationController? // контроллер с которого будет стартовать
     var assemblyBuilder: AssemblyBuilderProtocol?
 
     // MARK: - Initialization
@@ -39,16 +39,12 @@ final class Router: RouterProtocol { // класс который имплеме
     }
     
     func initialViewController() {
-        if let navigationController = navigationController {
-            guard let mainViewController = assemblyBuilder?.createMainModule(router: self) else { return }
-            navigationController.viewControllers = [mainViewController]
-        }
+        guard let mainViewController = assemblyBuilder?.createMainModule(router: self) else { return }
+        navigationController?.viewControllers = [mainViewController]
     }
 
     func showDetail(model: Photo?) {
-        if let navigationController = navigationController {
-            guard let detailViewController = assemblyBuilder?.createDetailModule(router: self, model: model) else { return }
-            navigationController.present(detailViewController, animated: true, completion: nil)
-        }
+        guard let detailViewController = assemblyBuilder?.createDetailModule(router: self, model: model) else { return }
+        navigationController?.present(detailViewController, animated: true, completion: nil)
     }
 }
